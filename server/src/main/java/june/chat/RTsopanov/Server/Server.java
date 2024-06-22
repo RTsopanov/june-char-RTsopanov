@@ -11,13 +11,10 @@ public class Server {
     private List<ClientHandler> clients;
 
 
-
     public Server(int port) {
         this.port = port;
         this.clients = new ArrayList<>();
     }
-
-
 
 
     public void start() {
@@ -36,16 +33,10 @@ public class Server {
     }
 
 
-
-
-
     public synchronized void subscribe(ClientHandler clientHandler) {
         broadcastMessage("В чать зашел " + clientHandler.getUserName());
         clients.add(clientHandler);
     }
-
-
-
 
 
     public synchronized void unsubscribe(ClientHandler clientHandler) {
@@ -61,17 +52,13 @@ public class Server {
     }
 
 
-
     public synchronized void personalBroadcastMessage(String message) {
         for (ClientHandler client : clients) {
-           if(client.getUserName().equals("Tom")){
-               client.out(message);
-           }
+            if (client.getUserName().equals("Tom")) {
+                client.out(message);
+            }
         }
     }
-
-
-
 
 
     public List<ClientHandler> getClients() {

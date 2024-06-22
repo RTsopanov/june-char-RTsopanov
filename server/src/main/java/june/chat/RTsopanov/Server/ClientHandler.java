@@ -15,8 +15,6 @@ public class ClientHandler {
     private final DataOutputStream OUT;
 
 
-
-
     public ClientHandler(Server server, Socket socket) throws IOException {
 
         this.clientSocket = socket;
@@ -25,10 +23,9 @@ public class ClientHandler {
         this.OUT = new DataOutputStream(socket.getOutputStream());
         usersCont++;
 
-       out("Введите свой ник.");
-       String name = in();
-       this.userName = name;
-
+        out("Введите свой ник.");
+        String name = in();
+        this.userName = name;
 
 
         Thread t1 = new Thread(new Runnable() {
@@ -41,8 +38,7 @@ public class ClientHandler {
                             if (result.equals("/exit")) {
                                 out("/exitok");
                                 break;
-                            }
-                            else if(result.startsWith("/w Tom")){
+                            } else if (result.startsWith("/w Tom")) {
                                 server.personalBroadcastMessage(result.replaceAll("/w Tom", "личное смс\n"));
 
                             }
@@ -62,17 +58,9 @@ public class ClientHandler {
     }
 
 
-
-
-
-
     public String in() throws IOException {
         return IN.readUTF();
     }
-
-
-
-
 
 
     public void out(String str) {
@@ -83,12 +71,6 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
 
 
     public void disconnect() {
@@ -115,9 +97,6 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
-
-
-
 
 
     public String getUserName() {
