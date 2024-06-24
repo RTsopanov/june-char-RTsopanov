@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Map;
 import java.util.Objects;
 
 public class ClientHandler {
@@ -11,8 +12,13 @@ public class ClientHandler {
     private Socket clientSocket;
     private static int usersCont = 0;
     private String userName;
+    private ClientHandler personUserName;
+
+
     private final DataInputStream IN;
     private final DataOutputStream OUT;
+
+
 
 
     public ClientHandler(Server server, Socket socket) throws IOException {
@@ -38,9 +44,8 @@ public class ClientHandler {
                             if (result.equals("/exit")) {
                                 out("/exitok");
                                 break;
-                            } else if (result.startsWith("/w Tom")) {
-                                server.personalBroadcastMessage(result.replaceAll("/w Tom", "личное смс\n"));
-
+                            } else if (result.startsWith("/w " +  personUserName)) {
+                                server.personalBroadcastMessage(personUserName,result.replaceAll("/w " + personUserName, "личное смс\n"));
                             }
                             continue;
                         }
@@ -102,5 +107,7 @@ public class ClientHandler {
     public String getUserName() {
         return userName;
     }
+
+
 
 }

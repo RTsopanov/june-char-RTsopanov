@@ -3,17 +3,20 @@ package june.chat.RTsopanov.Server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Server {
-    private int port;
-    private List<ClientHandler> clients;
+    private final int port;
+    private final Map<String, ClientHandler> clients;
+
+
+
 
 
     public Server(int port) {
         this.port = port;
-        this.clients = new ArrayList<>();
+        this.clients = new HashMap<>();
+
     }
 
 
@@ -35,7 +38,7 @@ public class Server {
 
     public synchronized void subscribe(ClientHandler clientHandler) {
         broadcastMessage("В чать зашел " + clientHandler.getUserName());
-        clients.add(clientHandler);
+        clients.put(String.valueOf(clientHandler), clientHandler);
     }
 
 
@@ -46,22 +49,27 @@ public class Server {
 
 
     public synchronized void broadcastMessage(String message) {
-        for (ClientHandler client : clients) {
-            client.out(message);
+        for (Map.Entry<String, ClientHandler> entry : clients.entrySet()) {
+            entry.getValue().out(message);
         }
     }
 
 
-    public synchronized void personalBroadcastMessage(String message) {
-        for (ClientHandler client : clients) {
-            if (client.getUserName().equals("Tom")) {
-                client.out(message);
+    public synchronized void personalBroadcastMessage(ClientHandler personUserName, String message) {
+//        clients.get(String.valueOf(personUserName)).out(message);
+
+
+        for (Map.Entry<String, ClientHandler> entry : clients.entrySet()) {
+            if (entry.getValue().equals(personUserName)) {
+                entry.getValue().out(message);
             }
         }
     }
 
 
-    public List<ClientHandler> getClients() {
+    public Map<String, ClientHandler> getClients() {
         return clients;
     }
+
+
 }
