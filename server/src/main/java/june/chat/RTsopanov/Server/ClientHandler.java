@@ -12,7 +12,8 @@ public class ClientHandler {
     private Socket clientSocket;
     private static int usersCont = 0;
     private String userName;
-    private ClientHandler personUserName;
+    private String personUserName;
+    private String message;
 
 
     private final DataInputStream IN;
@@ -44,8 +45,14 @@ public class ClientHandler {
                             if (result.equals("/exit")) {
                                 out("/exitok");
                                 break;
-                            } else if (result.startsWith("/w " +  personUserName)) {
-                                server.personalBroadcastMessage(personUserName,result.replaceAll("/w " + personUserName, "личное смс\n"));
+                            } else if (result.startsWith("/w " )) {
+
+                                String[] str = result.split(" ");
+                                personUserName = str[1];
+                                message = str[2];
+
+
+                                server.personalBroadcastMessage(personUserName, message);
                             }
                             continue;
                         }
@@ -106,6 +113,10 @@ public class ClientHandler {
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getPersonUserName() {
+        return personUserName;
     }
 
 

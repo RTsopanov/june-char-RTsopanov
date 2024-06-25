@@ -1,21 +1,21 @@
 package june.chat.RTsopanov.Server;
 
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
 public class Server {
     private final int port;
-    private final Map<String, ClientHandler> clients;
-
-
+    private final List<ClientHandler> clients;
 
 
 
     public Server(int port) {
         this.port = port;
-        this.clients = new HashMap<>();
+        this.clients = new ArrayList<>();
 
     }
 
@@ -37,8 +37,9 @@ public class Server {
 
 
     public synchronized void subscribe(ClientHandler clientHandler) {
-        broadcastMessage("В чать зашел " + clientHandler.getUserName());
-        clients.put(String.valueOf(clientHandler), clientHandler);
+        clients.add(clientHandler);
+        broadcastMessage("В чат зашел " + clientHandler.getUserName());
+
     }
 
 
@@ -49,25 +50,26 @@ public class Server {
 
 
     public synchronized void broadcastMessage(String message) {
-        for (Map.Entry<String, ClientHandler> entry : clients.entrySet()) {
-            entry.getValue().out(message);
+        System.out.println(clients);
+        for (ClientHandler client : clients) {
+            client.out(message);
         }
     }
 
 
-    public synchronized void personalBroadcastMessage(ClientHandler personUserName, String message) {
-//        clients.get(String.valueOf(personUserName)).out(message);
+    public synchronized void personalBroadcastMessage(String clientHandler, String message) {
 
-
-        for (Map.Entry<String, ClientHandler> entry : clients.entrySet()) {
-            if (entry.getValue().equals(personUserName)) {
-                entry.getValue().out(message);
+        for (ClientHandler client : clients) {
+            if(client.toString().equals(clientHandler)){
+                client.out(message);
             }
         }
     }
 
 
-    public Map<String, ClientHandler> getClients() {
+
+
+    public List<ClientHandler> getClients() {
         return clients;
     }
 
