@@ -10,7 +10,6 @@ import java.util.Objects;
 public class ClientHandler {
     private Server server;
     private Socket clientSocket;
-    private static int usersCont = 0;
     private String userName;
     private String personUserName;
     private String message;
@@ -20,15 +19,13 @@ public class ClientHandler {
     private final DataOutputStream OUT;
 
 
-
-
     public ClientHandler(Server server, Socket socket) throws IOException {
 
         this.clientSocket = socket;
         this.server = server;
         this.IN = new DataInputStream(socket.getInputStream());
         this.OUT = new DataOutputStream(socket.getOutputStream());
-        usersCont++;
+
 
         out("Введите свой ник.");
         String name = in();
@@ -45,12 +42,11 @@ public class ClientHandler {
                             if (result.equals("/exit")) {
                                 out("/exitok");
                                 break;
-                            } else if (result.startsWith("/w " )) {
+                            } else if (result.startsWith("/w ")) {
 
                                 String[] str = result.split(" ");
                                 personUserName = str[1];
                                 message = str[2];
-
 
                                 server.personalBroadcastMessage(personUserName, message);
                             }
@@ -114,11 +110,5 @@ public class ClientHandler {
     public String getUserName() {
         return userName;
     }
-
-    public String getPersonUserName() {
-        return personUserName;
-    }
-
-
 
 }

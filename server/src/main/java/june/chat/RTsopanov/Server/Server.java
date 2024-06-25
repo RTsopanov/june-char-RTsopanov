@@ -9,13 +9,12 @@ import java.util.*;
 
 public class Server {
     private final int port;
-    private final List<ClientHandler> clients;
-
+    private Map<String, ClientHandler> map;
 
 
     public Server(int port) {
         this.port = port;
-        this.clients = new ArrayList<>();
+        this.map = new HashMap<>();
 
     }
 
@@ -37,41 +36,32 @@ public class Server {
 
 
     public synchronized void subscribe(ClientHandler clientHandler) {
-        clients.add(clientHandler);
+        map.put(clientHandler.toString(), clientHandler);
         broadcastMessage("В чат зашел " + clientHandler.getUserName());
 
     }
 
 
     public synchronized void unsubscribe(ClientHandler clientHandler) {
-        clients.remove(clientHandler);
+        map.remove(clientHandler.toString(), clientHandler);
         broadcastMessage("Из чата вышел " + clientHandler.getUserName());
     }
 
 
     public synchronized void broadcastMessage(String message) {
-        System.out.println(clients);
-        for (ClientHandler client : clients) {
-            client.out(message);
+        for (Map.Entry<String, ClientHandler> entry : map.entrySet()) {
+            entry.getValue().out(message);
         }
     }
 
 
     public synchronized void personalBroadcastMessage(String clientHandler, String message) {
-
-        for (ClientHandler client : clients) {
-            if(client.toString().equals(clientHandler)){
-                client.out(message);
+        for (Map.Entry<String, ClientHandler> entry : map.entrySet()) {
+            if (entry.getValue().getUserName().equals(clientHandler)) {
+                entry.getValue().out(message);
             }
         }
+
+
     }
-
-
-
-
-    public List<ClientHandler> getClients() {
-        return clients;
-    }
-
-
 }
