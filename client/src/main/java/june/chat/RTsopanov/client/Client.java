@@ -16,45 +16,45 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
 
 
-            socket = new Socket("localhost", 9998);
-            this.IN = new DataInputStream(socket.getInputStream());
-            this.OUT = new DataOutputStream(socket.getOutputStream());
+        socket = new Socket("localhost", 9998);
+        this.IN = new DataInputStream(socket.getInputStream());
+        this.OUT = new DataOutputStream(socket.getOutputStream());
 
 
-            Thread t1 = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        while (true) {
-                            String result = in();
-                            if(result.equals("/exitok")){
-                                break;
-                            }
-
-                            System.out.println(result);
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        String result = in();
+                        if (result.equals("/exitok")) {
+                            break;
                         }
+
+                        System.out.println(result);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        disconnect();
                     } catch (IOException e) {
                         e.printStackTrace();
-                    } finally {
-                        try {
-                            disconnect();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
-            });
-            t1.start();
-
-
-            while (true) {
-                String message = scanner.nextLine();
-                out(message);
-
-                if (message.equals("/exit")) {
-                    break;
-                }
             }
+        });
+        t1.start();
+
+
+        while (true) {
+            String message = scanner.nextLine();
+            out(message);
+
+            if (message.equals("/exit")) {
+                break;
+            }
+        }
     }
 
 
@@ -69,6 +69,7 @@ public class Client {
         OUT.writeUTF(str);
         OUT.flush();
     }
+
 
 
     public void disconnect() throws IOException {

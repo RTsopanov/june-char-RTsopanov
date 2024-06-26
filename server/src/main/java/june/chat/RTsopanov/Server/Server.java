@@ -1,23 +1,22 @@
 package june.chat.RTsopanov.Server;
 
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Server {
-    private int port;
-    private List<ClientHandler> clients;
-
+    private final int port;
+    private Map<String, ClientHandler> map;
 
 
     public Server(int port) {
         this.port = port;
-        this.clients = new ArrayList<>();
+        this.map = new HashMap<>();
+
     }
-
-
 
 
     public void start() {
@@ -36,45 +35,33 @@ public class Server {
     }
 
 
-
-
-
     public synchronized void subscribe(ClientHandler clientHandler) {
-        broadcastMessage("В чать зашел " + clientHandler.getUserName());
-        clients.add(clientHandler);
+        map.put(clientHandler.toString(), clientHandler);
+        broadcastMessage("В чат зашел " + clientHandler.getUserName());
+
     }
 
 
-
-
-
     public synchronized void unsubscribe(ClientHandler clientHandler) {
-        clients.remove(clientHandler);
+        map.remove(clientHandler.toString(), clientHandler);
         broadcastMessage("Из чата вышел " + clientHandler.getUserName());
     }
 
 
     public synchronized void broadcastMessage(String message) {
-        for (ClientHandler client : clients) {
-            client.out(message);
+        for (Map.Entry<String, ClientHandler> entry : map.entrySet()) {
+            entry.getValue().out(message);
         }
     }
 
 
-
-    public synchronized void personalBroadcastMessage(String message) {
-        for (ClientHandler client : clients) {
-           if(client.getUserName().equals("Tom")){
-               client.out(message);
-           }
+    public synchronized void personalBroadcastMessage(String clientHandler, String message) {
+        for (Map.Entry<String, ClientHandler> entry : map.entrySet()) {
+            if (entry.getValue().getUserName().equals(clientHandler)) {
+                entry.getValue().out(message);
+            }
         }
-    }
 
 
-
-
-
-    public List<ClientHandler> getClients() {
-        return clients;
     }
 }

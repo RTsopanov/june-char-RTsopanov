@@ -4,17 +4,19 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Map;
 import java.util.Objects;
 
 public class ClientHandler {
     private Server server;
     private Socket clientSocket;
-    private static int usersCont = 0;
     private String userName;
+    private String personUserName;
+    private String message;
+
+
     private final DataInputStream IN;
     private final DataOutputStream OUT;
-
-
 
 
     public ClientHandler(Server server, Socket socket) throws IOException {
@@ -23,12 +25,11 @@ public class ClientHandler {
         this.server = server;
         this.IN = new DataInputStream(socket.getInputStream());
         this.OUT = new DataOutputStream(socket.getOutputStream());
-        usersCont++;
 
-       out("Введите свой ник.");
-       String name = in();
-       this.userName = name;
 
+        out("Введите свой ник.");
+        String name = in();
+        this.userName = name;
 
 
         Thread t1 = new Thread(new Runnable() {
@@ -41,10 +42,13 @@ public class ClientHandler {
                             if (result.equals("/exit")) {
                                 out("/exitok");
                                 break;
-                            }
-                            else if(result.startsWith("/w Tom")){
-                                server.personalBroadcastMessage(result.replaceAll("/w Tom", "личное смс\n"));
+                            } else if (result.startsWith("/w ")) {
 
+                                String[] str = result.split(" ");
+                                personUserName = str[1];
+                                message = str[2];
+
+                                server.personalBroadcastMessage(personUserName, message);
                             }
                             continue;
                         }
@@ -62,17 +66,9 @@ public class ClientHandler {
     }
 
 
-
-
-
-
     public String in() throws IOException {
         return IN.readUTF();
     }
-
-
-
-
 
 
     public void out(String str) {
@@ -83,12 +79,6 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
 
 
     public void disconnect() {
@@ -115,9 +105,6 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
-
-
-
 
 
     public String getUserName() {
