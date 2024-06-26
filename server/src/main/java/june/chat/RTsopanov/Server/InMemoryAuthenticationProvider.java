@@ -117,14 +117,6 @@ public class InMemoryAuthenticationProvider implements AuthenticationProvider {
         clientHandler.setUserName(name);
         server.subscribe(clientHandler);
         clientHandler.out("/regok " + name);
-
-
-        //TODO   delete for (User user : users) {
-        //            System.out.println(user.username + " " + user.role);
-        //        }
-        for (User user : users) {
-            System.out.println(user.username + " " + user.role);
-        }
         return true;
     }
 
@@ -132,7 +124,7 @@ public class InMemoryAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean kickUserName(ClientHandler clientHandler, String username, String name) {
         for (User user : users) {
-            if(username.equals(user.username) && !user.role.equals("admin")){
+            if (username.equals(user.username) && !user.role.equals("admin")) {
                 clientHandler.out("Для вас недоступна команда '/kick'");
                 return false;
             }
@@ -141,16 +133,7 @@ public class InMemoryAuthenticationProvider implements AuthenticationProvider {
                 for (User us : users) {
                     if (us.username.equals(name)) {
                         users.remove(us);
-                        server.unsubscribe(clientHandler);
-                        clientHandler.out("Пользователь ник: " + name +  " удален успешно.");
-
-
-                        //TODO   delete for (User us : users) {
-                        //      System.out.println(us.username + " " + us.role);
-                        //      }
-                        for (User use : users) {
-                            System.out.println(use.username + " " + use.role);
-                        }
+                        clientHandler.out("Пользователь ник: " + name + " удален успешно.");
                         return true;
                     }
                 }

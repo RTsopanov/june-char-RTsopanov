@@ -73,7 +73,6 @@ public class ClientHandler {
                 }
 
 
-
                 while (true) {
                     String result = in();
                     if (result.startsWith("/")) {
@@ -97,11 +96,9 @@ public class ClientHandler {
                             if (str.length != 2) {
                                 out("Некорректный формат данных '/kick username'");
                             }
-
-                            server.getAuthenticationProvider().kickUserName(this, userName,str[1]);
+                            server.getAuthenticationProvider().kickUserName(this, userName, str[1]);
                         }
                         continue;
-
                     }
                     server.broadcastMessage(userName + ": " + result);
                 }
