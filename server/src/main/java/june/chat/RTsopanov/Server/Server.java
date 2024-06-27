@@ -1,8 +1,6 @@
 package june.chat.RTsopanov.Server;
 
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -10,24 +8,26 @@ import java.util.*;
 public class Server {
     private final int port;
     private Map<String, ClientHandler> map;
+    private AuthenticationProvider authenticationProvider;
 
 
     public Server(int port) {
         this.port = port;
         this.map = new HashMap<>();
-
+        this.authenticationProvider = new InMemoryAuthenticationProvider(this);
     }
 
 
     public void start() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Сервер запущен");
+            authenticationProvider.initialize();
 
 
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("Подключился новый клиент");
-                subscribe(new ClientHandler(this, socket));
+                new ClientHandler(this, socket);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +61,24 @@ public class Server {
                 entry.getValue().out(message);
             }
         }
+    }
 
 
+    public boolean isUserNameBusy(String userNmae){
+        for(Map.Entry<String, ClientHandler> entry: map.entrySet()){
+            if(entry.getValue().getUserName().equals(userNmae)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+
+    public AuthenticationProvider getAuthenticationProvider() {
+        return authenticationProvider;
     }
 }
