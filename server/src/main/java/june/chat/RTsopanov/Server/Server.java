@@ -3,18 +3,20 @@ package june.chat.RTsopanov.Server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Server {
     private final int port;
     private Map<String, ClientHandler> map;
     private AuthenticationProvider authenticationProvider;
+    private UserService userService;
 
-
-    public Server(int port) {
+    public Server(int port) throws SQLException {
         this.port = port;
         this.map = new HashMap<>();
         this.authenticationProvider = new InMemoryAuthenticationProvider(this);
+        this.userService = new UserServiceJdbc(this);
     }
 
 
@@ -27,7 +29,8 @@ public class Server {
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("Подключился новый клиент");
-                new ClientHandler(this, socket);
+                new UserServiceJdbc (this);
+//                new ClientHandler(this, socket);
             }
         } catch (Exception e) {
             e.printStackTrace();
