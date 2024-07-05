@@ -1,5 +1,6 @@
 package june.chat.RTsopanov.Server;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserServiceJdbc implements UserService, AutoCloseable {
-    private Server server;
+public class UserServiceJdbc implements UserService, AutoCloseable, AuthenticationProvider {
     private static final String URL = "jdbc:postgresql://localhost:5433/june-chat";
     private static final String passwordDB = "!Hund111";
     private static final String userName = "postgres";
@@ -32,6 +32,8 @@ public class UserServiceJdbc implements UserService, AutoCloseable {
             """;
 
     private Connection connection;
+    private Server server;
+    List<User> allUsers = new ArrayList<>();
 
     public UserServiceJdbc(Server server) throws SQLException {
         this.server = server;
@@ -43,22 +45,22 @@ public class UserServiceJdbc implements UserService, AutoCloseable {
     }
 
 
-
     public UserServiceJdbc(Connection connection) {
         this.connection = connection;
     }
 
     @Override
     public List<User> getAll() {
-        List<User> allUsers = new ArrayList<>();
+
         try (Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(USERS_QUERY)) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
-                    String password = resultSet.getString(2);
-                    String email = resultSet.getString(3);
-                    User user = new User(id, password, email);
+                    String login = resultSet.getString(2);
+                    String password = resultSet.getString(3);
+                    User user = new User(id, login, password);
                     allUsers.add(user);
+
                 }
             }
         } catch (SQLException e) {
@@ -101,10 +103,16 @@ public class UserServiceJdbc implements UserService, AutoCloseable {
     }
 
 
-    public synchronized boolean authenticateJabc(ClientHandler clientHandler, String login, String password) throws SQLException {
-        connection = DriverManager.getConnection(URL, userName, passwordDB);
+
+    @Override
+    public boolean authenticate(ClientHandler clientHandler, String login, String password) {
+        try {
+            connection = DriverManager.getConnection(URL, userName, passwordDB);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         try (Statement statement = connection.createStatement()) {
-            try (ResultSet re = statement.executeQuery("SELECT * FROM users WHERE login = " + login + "and password = " + password)) {
+            try (ResultSet re = statement.executeQuery("SELECT * FROM users WHERE login = " + "'" + login + "'" + " and password = " + "'" + password + "'")) {
                 while (re.next()) {
                     String log = re.getString("login");
                     String pass = re.getString("password");
@@ -116,11 +124,47 @@ public class UserServiceJdbc implements UserService, AutoCloseable {
                         return true;
                     }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return true;
     }
 
+
+    @Override
+    public boolean registration(ClientHandler clientHandler, String login, String password, String name, String role) {
+        if (isLoginAmlreadyExist(login, password)) {
+            try {connection = DriverManager.getConnection(URL, userName, passwordDB);
+                Statement statement = connection.createStatement();
+                 statement.executeUpdate("Insert into users (login, password, username) values ('" + login + "', " + "'" + password + "', " + "'" + name + "');");
+
+
+        allUsers.add(new User(password, name ));
+        clientHandler.setUserName(name);
+        server.subscribe(clientHandler);
+        clientHandler.out("/regok " + name);
+                return true;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+            clientHandler.out("Указанный логин/пароль уже занят");
+        return false;
+    }
+
+
+    @Override
+    public boolean kickUserName(ClientHandler clientHandler, String username, String name) {
+        return false;
+    }
+
+    @Override
+    public void initialize() {
+        System.out.println("Сервер аутентификации запущен: In-Memory режим");
+    }
 
     @Override
     public void close() throws Exception {
@@ -130,5 +174,24 @@ public class UserServiceJdbc implements UserService, AutoCloseable {
             e.printStackTrace();
         }
     }
+
+
+    private boolean isLoginAmlreadyExist(String login, String password) {
+        getAll();
+        for (User us : allUsers) {
+            if (us.getLogin().equals(login)) {
+                return false;
+            }
+            if (us.getPassword().equals(password)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
+
 }
 

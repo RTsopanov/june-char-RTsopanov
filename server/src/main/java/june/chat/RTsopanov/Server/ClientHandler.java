@@ -4,11 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
 public class ClientHandler {
-    private final UserServiceJdbc userServiceJdbc;
+
     private Server server;
     private Socket clientSocket;
     private String userName;
@@ -18,8 +20,9 @@ public class ClientHandler {
     private final DataOutputStream OUT;
 
 
-    public ClientHandler(UserServiceJdbc userServiceJdbc, Server server, Socket socket) throws IOException {
-        this.userServiceJdbc = userServiceJdbc;
+
+
+    public ClientHandler(Server server, Socket socket ) throws IOException {
         this.clientSocket = socket;
         this.server = server;
         this.IN = new DataInputStream(socket.getInputStream());
@@ -45,14 +48,10 @@ public class ClientHandler {
                             continue;
                         }
 
-                        try {
-                            if (userServiceJdbc.authenticateJabc(this, str[1], str[2])){
-    //                                server.getAuthenticationProvider().authenticate(this, str[1], str[2])) {
+                            if (server.getAuthenticationProvider().authenticate(this, str[1], str[2])) {
                                 break;
                             }
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
+
                         continue;
                     }
 

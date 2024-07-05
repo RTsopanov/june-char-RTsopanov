@@ -6,15 +6,22 @@ import java.util.List;
 public class User {
     private int id;
     private String password;
-    private String email;
+    private String login;
 
     private List<Role> roles = new ArrayList<>();
 
-    public User(int id, String password, String email) {
+    public User(int id, String login, String password) {
         this.id = id;
         this.password = password;
-        this.email = email;
+        this.login = login;
     }
+
+
+    public User(String login, String password) {
+        this.password = password;
+        this.login = login;
+    }
+
 
     public int getId() {
         return id;
@@ -32,24 +39,27 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
+
+
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
                 ", roles=" + roles +
                 '}';
     }

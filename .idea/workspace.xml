@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1648c629-4136-4a4e-8bfd-f59af890a837" name="Changes" comment="june-chat-RTsopanov1 - feature 2">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/UserServiceJdbc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/InMemoryAuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/InMemoryAuthenticationProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/UserServiceJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/UserServiceJdbc.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +57,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.ClientApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Debug&quot;,
     &quot;Application.ServerApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.ServerDB$User.executor&quot;: &quot;Run&quot;,
     &quot;Application.ServerDB.executor&quot;: &quot;Run&quot;,
@@ -89,6 +84,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="june.chat.RTsopanov.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="june.chat.RTsopanov.Server.Main" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="june.chat.RTsopanov.Server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -137,9 +145,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.ServerDB$User" />
         <item itemvalue="Application.ServerDB" />
-        <item itemvalue="Application.ServerApplication" />
         <item itemvalue="Application.ServerApplication" />
         <item itemvalue="Application.ServerApplication" />
       </list>

@@ -16,7 +16,7 @@ public class Server {
         this.port = port;
         this.map = new HashMap<>();
         this.authenticationProvider = new InMemoryAuthenticationProvider(this);
-        this.userService = new UserServiceJdbc(this);
+        this.authenticationProvider = new UserServiceJdbc(this);
     }
 
 
@@ -29,8 +29,7 @@ public class Server {
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("Подключился новый клиент");
-                new UserServiceJdbc (this);
-//                new ClientHandler(this, socket);
+                new ClientHandler(this, socket);
             }
         } catch (Exception e) {
             e.printStackTrace();
