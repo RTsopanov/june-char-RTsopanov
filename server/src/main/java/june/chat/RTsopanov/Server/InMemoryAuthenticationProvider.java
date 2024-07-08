@@ -72,51 +72,52 @@ public class InMemoryAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public synchronized boolean authenticate(ClientHandler clientHandler, String login, String password) {
-        String authtUserName = getUserNameByLoginAndPassword(login, password);
-
-        if (authtUserName == null) {
-            clientHandler.out("Некорректный логин/пароль");
-            return false;
-        }
-
-        if (server.isUserNameBusy(authtUserName)) {
-            clientHandler.out("Данный пользователь уже авторизован");
-            return false;
-        }
-
-        clientHandler.setUserName(authtUserName);
-        server.subscribe(clientHandler);
-        clientHandler.out("/authok " + authtUserName);
-        return true;
+//        String authtUserName = getUserNameByLoginAndPassword(login, password);
+//
+//        if (authtUserName == null) {
+//            clientHandler.out("Некорректный логин/пароль");
+//            return false;
+//        }
+//
+//        if (server.isUserNameBusy(authtUserName)) {
+//            clientHandler.out("Данный пользователь уже авторизован");
+//            return false;
+//        }
+//
+//        clientHandler.setUserName(authtUserName);
+//        server.subscribe(clientHandler);
+//        clientHandler.out("/authok " + authtUserName);
+        return false;
+//        return true;
     }
 
 
     @Override
     public boolean registration(ClientHandler clientHandler, String login, String password, String name, String role) {
-        if (login.trim().length() < 3 || password.trim().length() < 6 || name.trim().length() < 1) {
-            clientHandler.out("Логин 3+ символа, Пароль 6+ символов, Имя 1+ символ.");
-            return false;
-        }
-
-        if (isLoginAmlreadyExist(login)) {
-            clientHandler.out("Указанный логин уже занят");
-            return false;
-        }
-
-        if (isUserNameAmlreadyExist(name)) {
-            clientHandler.out("Указанный имя уже занято");
-            return false;
-        }
-
-        if (!(role.equals("user") || (role.equals("admin")))) {
-            clientHandler.out("Не верно указанна роль 'user / admin'");
-            return false;
-        }
-
-        users.add(new User(login, password, name, role));
-        clientHandler.setUserName(name);
-        server.subscribe(clientHandler);
-        clientHandler.out("/regok " + name);
+//        if (login.trim().length() < 3 || password.trim().length() < 6 || name.trim().length() < 1) {
+//            clientHandler.out("Логин 3+ символа, Пароль 6+ символов, Имя 1+ символ.");
+//            return false;
+//        }
+//
+//        if (isLoginAmlreadyExist(login)) {
+//            clientHandler.out("Указанный логин уже занят");
+//            return false;
+//        }
+//
+//        if (isUserNameAmlreadyExist(name)) {
+//            clientHandler.out("Указанный имя уже занято");
+//            return false;
+//        }
+//
+//        if (!(role.equals("user") || (role.equals("admin")))) {
+//            clientHandler.out("Не верно указанна роль 'user / admin'");
+//            return false;
+//        }
+//
+//        users.add(new User(login, password, name, role));
+//        clientHandler.setUserName(name);
+//        server.subscribe(clientHandler);
+//        clientHandler.out("/regok " + name);
         return true;
     }
 
@@ -145,6 +146,8 @@ public class InMemoryAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public void initialize() {
-        System.out.println("Сервер аутентификации запущен: In-Memory режим");
+        System.out.println(
+//                "Сервер аутентификации запущен: In-Memory режим"
+        );
     }
 }

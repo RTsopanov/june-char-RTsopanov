@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1648c629-4136-4a4e-8bfd-f59af890a837" name="Changes" comment="june-chat-RTsopanov1 - feature 2">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/AuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/InMemoryAuthenticationProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/june/chat/RTsopanov/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/june/chat/RTsopanov/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/InMemoryAuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/InMemoryAuthenticationProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/UserServiceJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/UserServiceJdbc.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +34,16 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/03bb6993-0375-4753-8732-0438bb9c4338_java_basic_2024_03_jdbc-267409-26340f (2).zip.338/java-basic-2024-03-jdbc/src/main/java/org/example/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/133c9e04-cd95-4c39-8082-c60e8269256a_java_basic_2024_03_jdbc-267409-26340f (2).zip.56a/java-basic-2024-03-jdbc/src/main/java/org/example/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/615fe08e-6fa0-401a-9b51-377e3c3aa3ae_java_basic_2024_03_jdbc-267409-26340f (2).zip.3ae/java-basic-2024-03-jdbc/src/main/java/org/example/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/94077280-84aa-4918-968f-5f4fbbf2ec53_java_basic_2024_03_jdbc-267409-26340f (2).zip.c53/java-basic-2024-03-jdbc/src/main/java/org/example/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -43,19 +54,29 @@
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_DESCENDING" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ClientApplication.executor": "Run",
-    "Application.ServerApplication.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "jine-chat2",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Desktop/JAVA/OTUS/otus.java.basic.RTsopanov",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ClientApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServerDB$User.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServerDB.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;jine-chat2&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/JAVA/OTUS/june-chat/src&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ClientApplication" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="june.chat.RTsopanov.client.ClientApplication" />
@@ -63,6 +84,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="june.chat.RTsopanov.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="june.chat.RTsopanov.Server.Main" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="june.chat.RTsopanov.Server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -83,9 +117,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServerDB$User" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="june.chat.RTsopanov.Server.ServerDB$User" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="june.chat.RTsopanov.Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="june.chat.RTsopanov.Server.ServerDB" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="june.chat.RTsopanov.Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerApplication" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ServerDB$User" />
+        <item itemvalue="Application.ServerDB" />
         <item itemvalue="Application.ServerApplication" />
         <item itemvalue="Application.ServerApplication" />
       </list>
@@ -147,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719312619635</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="june-chat-RTsopanov2 - feature 1">
+      <option name="closed" value="true" />
+      <created>1719406998666</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719406998666</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,7 +225,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -165,28 +247,16 @@
     <MESSAGE value="june-chat-RTsopanov" />
     <MESSAGE value="june-chat-RTsopanov1" />
     <MESSAGE value="june-chat-RTsopanov1 - feature 1" />
-    <MESSAGE value="june-chat-RTsopanov1 - feature 2" />
     <MESSAGE value="june-chat - RTsopanov1 - feature 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="june-chat - RTsopanov1 - feature 3" />
+    <MESSAGE value="june-chat-RTsopanov1 - feature 2" />
+    <MESSAGE value="june-chat-RTsopanov2 - feature 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="june-chat-RTsopanov2 - feature 1" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/InMemoryAuthenticationProvider.java</url>
-          <line>132</line>
-          <properties class="june.chat.RTsopanov.Server.InMemoryAuthenticationProvider" method="kickUserName">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/main/java/june/chat/RTsopanov/Server/ClientHandler.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.postgresql.jdbc.PgResultSet" memberName="cursor" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

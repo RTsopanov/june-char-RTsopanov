@@ -3,18 +3,20 @@ package june.chat.RTsopanov.Server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Server {
     private final int port;
     private Map<String, ClientHandler> map;
     private AuthenticationProvider authenticationProvider;
+    private UserService userService;
 
-
-    public Server(int port) {
+    public Server(int port) throws SQLException {
         this.port = port;
         this.map = new HashMap<>();
         this.authenticationProvider = new InMemoryAuthenticationProvider(this);
+        this.authenticationProvider = new UserServiceJdbc(this);
     }
 
 
